@@ -1,8 +1,8 @@
 import { Box, Grid } from "@chakra-ui/react";
 import Header from "./components/Header";
 import { Route, Routes } from "react-router-dom";
-import { Project } from "./containers/Project";
-import { Client } from "./containers/Client";
+import { Project } from "./containers/Project/Project";
+import { Client } from "./containers/Client/Client";
 
 function App() {
   return (
