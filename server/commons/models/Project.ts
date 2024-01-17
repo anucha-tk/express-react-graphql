@@ -7,7 +7,7 @@ const ProjectSchema = new mongoose.Schema({
   description: {
     type: String,
   },
-  ststus: {
+  status: {
     type: String,
     enum: ["Not Started", "In Progress", "Completed"],
   },
