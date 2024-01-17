@@ -8,11 +8,14 @@ import {
   Heading,
   StackDivider,
   Badge,
+  CardFooter,
+  IconButton,
 } from "@chakra-ui/react";
 import { Project } from "../__generated__/graphql";
 import { Maybe } from "graphql/jsutils/Maybe";
+import { DeleteIcon } from "@chakra-ui/icons";
 
-export const Card = ({ project }: { project: Maybe<Project> }) => {
+export const ProjectCard = ({ project }: { project: Maybe<Project> }) => {
   let colorStaus = "purple";
   switch (project?.status) {
     case "In Progress":
@@ -55,6 +58,16 @@ export const Card = ({ project }: { project: Maybe<Project> }) => {
           </Box>
         </Stack>
       </CardBody>
+      <CardFooter justifyContent={"center"}>
+        <IconButton
+          aria-label="delete button"
+          icon={<DeleteIcon />}
+          colorScheme="red"
+          // onClick={() => deleteClient()}
+        >
+          Delete
+        </IconButton>
+      </CardFooter>
     </CardChakra>
   );
 };
