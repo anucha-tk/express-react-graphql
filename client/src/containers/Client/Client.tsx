@@ -27,7 +27,7 @@ export const Client = () => {
 
   return (
     <CardMain name={"Clients"} onOpen={onOpen} loading={loading}>
-      <CModal isOpen={isOpen} onClose={onClose}>
+      <CModal title="Create your client" isOpen={isOpen} onClose={onClose}>
         <CForm
           onClose={onClose}
           handleSubmit={handleSubmit}

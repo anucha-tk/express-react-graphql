@@ -8,10 +8,12 @@ import {
 import { useRef } from "react";
 
 const CModal = ({
+  title,
   isOpen,
   onClose,
   children,
 }: {
+  title: string;
   isOpen: boolean;
   onClose: () => void;
   children: React.ReactNode;
@@ -29,7 +31,7 @@ const CModal = ({
       >
         <ModalOverlay />
         <ModalContent>
-          <ModalHeader>Create your Client</ModalHeader>
+          <ModalHeader>{title}</ModalHeader>
           <ModalCloseButton />
           {children}
         </ModalContent>

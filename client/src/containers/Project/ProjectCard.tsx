@@ -10,15 +10,35 @@ import {
   Badge,
   CardFooter,
   IconButton,
+  useDisclosure,
+  FormLabel,
+  Select,
+  FormErrorMessage,
 } from "@chakra-ui/react";
-import { Project, RootQueryType } from "../__generated__/graphql";
 import { Maybe } from "graphql/jsutils/Maybe";
-import { DeleteIcon } from "@chakra-ui/icons";
-import { DELETE_PROJECT } from "../services/graphql/mutations/deleteProject";
+import { DeleteIcon, EditIcon } from "@chakra-ui/icons";
 import { useMutation } from "@apollo/client";
-import { GET_PROJECTS } from "../services/graphql/getProjects";
+import { Project, RootQueryType } from "../../__generated__/graphql";
+import { DELETE_PROJECT } from "../../services/graphql/mutations/deleteProject";
+import { GET_PROJECTS } from "../../services/graphql/getProjects";
+import { CForm } from "../../components/forms/CForm";
+import { FormInput } from "../../components/forms/FormInput";
+import CModal from "../../components/CModal";
+import useUpdateProjectForm from "./useUpdateProjectForm";
 
 export const ProjectCard = ({ project }: { project: Maybe<Project> }) => {
+  const { isOpen, onOpen, onClose } = useDisclosure();
+
+  const {
+    handleSubmit,
+    register,
+    isSubmitting,
+    isValid,
+    onSubmit,
+    errors,
+    reset,
+  } = useUpdateProjectForm(project);
+
   let colorStaus = "purple";
   switch (project?.status) {
     case "In Progress":
@@ -79,7 +99,15 @@ export const ProjectCard = ({ project }: { project: Maybe<Project> }) => {
           </Box>
         </Stack>
       </CardBody>
-      <CardFooter justifyContent={"center"}>
+      <CardFooter justifyContent={"center"} gap={2}>
+        <IconButton
+          aria-label="edit button"
+          icon={<EditIcon />}
+          colorScheme="green"
+          onClick={() => onOpen()}
+        >
+          Edit
+        </IconButton>
         <IconButton
           aria-label="delete button"
           icon={<DeleteIcon />}
@@ -89,6 +117,35 @@ export const ProjectCard = ({ project }: { project: Maybe<Project> }) => {
           Delete
         </IconButton>
       </CardFooter>
+
+      <CModal title="Edit your project" isOpen={isOpen} onClose={onClose}>
+        <CForm
+          onClose={onClose}
+          handleSubmit={handleSubmit}
+          register={register}
+          errors={errors}
+          isSubmitting={isSubmitting}
+          onSubmit={onSubmit}
+          isValid={isValid}
+          reset={reset}
+        >
+          <FormInput name="name" register={register} errors={errors.name} />
+          <FormInput
+            name="description"
+            register={register}
+            errors={errors.description}
+          />
+          <FormLabel htmlFor={"status"}>Status</FormLabel>
+          <Select id={"status"} {...register("status")}>
+            <option value="new">Not Started</option>
+            <option value="progress">In Progress</option>
+            <option value="completed">Completed</option>
+          </Select>
+          <FormErrorMessage>
+            {errors && errors.status?.message}
+          </FormErrorMessage>
+        </CForm>
+      </CModal>
     </CardChakra>
   );
 };

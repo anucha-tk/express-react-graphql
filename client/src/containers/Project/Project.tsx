@@ -33,7 +33,7 @@ export const Project = () => {
 
   return (
     <CardMain name="Projects" onOpen={onOpen} loading={loading}>
-      <CModal isOpen={isOpen} onClose={onClose}>
+      <CModal title="Create your project" isOpen={isOpen} onClose={onClose}>
         <CForm
           onClose={onClose}
           handleSubmit={handleSubmit}
