@@ -5,7 +5,8 @@ import {
   GraphQLSchema,
   GraphQLString,
 } from "graphql";
-import { clients, projects } from "../datas/sampleData";
+import Project from "../commons/models/Project";
+import Client from "../commons/models/Client";
 
 const ClientType = new GraphQLObjectType({
   name: "Client",
@@ -26,7 +27,7 @@ const ProjectType = new GraphQLObjectType({
     status: { type: GraphQLString },
     client: {
       type: ClientType,
-      resolve: (parent, _) => clients.find((client) => client.id === parent.id),
+      resolve: (parent, _) => Client.findById(parent.id),
     },
   }),
 });
@@ -36,24 +37,24 @@ const RootQuery = new GraphQLObjectType({
   fields: {
     projects: {
       type: new GraphQLList(ProjectType),
-      resolve: () => projects,
+      resolve: () => Project.find(),
     },
     project: {
       type: ProjectType,
       args: { id: { type: GraphQLID } },
       resolve(_, args) {
-        return projects.find((project: any) => project.id === args.id);
+        return Project.findById(args);
       },
     },
     clients: {
       type: new GraphQLList(ClientType),
-      resolve: () => clients,
+      resolve: () => Client.find(),
     },
     client: {
       type: ClientType,
       args: { id: { type: GraphQLID } },
       resolve(_, args) {
-        return clients.find((client: any) => client.id === args.id);
+        return Client.findById(args);
       },
     },
   },

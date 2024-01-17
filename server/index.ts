@@ -1,12 +1,15 @@
 import express from "express";
-import { green, yellow } from "colors";
 import dotenv from "dotenv";
 import { graphqlHTTP } from "express-graphql";
 import schema from "./schema/schema";
 import morgan from "morgan";
 import cors from "cors";
+import connectDB from "./commons/database/db";
+import { logger } from "./commons/logger/logger";
 dotenv.config();
 
+// connect DB
+connectDB();
 const port = process.env.PORT || 5000;
 const app = express();
 app.use(cors());
@@ -21,6 +24,5 @@ app.use(
 );
 
 app.listen(port, () => {
-  console.log(yellow("-----------------------"));
-  console.log(green(`app run on port ${port}`));
+  logger.info(`app run on port ${port}`);
 });
