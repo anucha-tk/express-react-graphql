@@ -10,7 +10,7 @@ function App() {
       <Header />
       <Grid>
         <Routes>
-          <Route path="/" element={<Client />} />
+          <Route path="*" element={<Client />} />
           <Route path="/projects" element={<Project />} />
         </Routes>
       </Grid>

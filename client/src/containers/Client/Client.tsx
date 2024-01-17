@@ -4,10 +4,10 @@ import { RootQueryType } from "../../__generated__/graphql";
 import { GET_CLIENTS } from "../../services/graphql/getClients";
 import CModal from "../../components/CModal";
 import { CForm } from "../../components/forms/CForm";
-import { ClientCard } from "../../components/ClientCard";
 import useClientForm from "./useClientform";
 import { CardMain } from "../../components/CardMain";
 import { FormInput } from "../../components/forms/FormInput";
+import { ClientCard } from "./ClientCard";
 
 export const Client = () => {
   const { isOpen, onOpen, onClose } = useDisclosure();

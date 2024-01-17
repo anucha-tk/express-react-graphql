@@ -4,13 +4,12 @@ import {
   FormLabel,
   Grid,
   GridItem,
-  Input,
   Select,
   useDisclosure,
 } from "@chakra-ui/react";
 import { RootQueryType } from "../../__generated__/graphql";
 import { GET_PROJECTS } from "../../services/graphql/getProjects";
-import { ProjectCard } from "../../components/ProjectCard";
+import { ProjectCard } from "./ProjectCard";
 import { CardMain } from "../../components/CardMain";
 import CModal from "../../components/CModal";
 import { CForm } from "../../components/forms/CForm";

@@ -10,12 +10,12 @@ import {
   CardFooter,
   IconButton,
 } from "@chakra-ui/react";
-import { Client, RootQueryType } from "../__generated__/graphql";
 import { Maybe } from "graphql/jsutils/Maybe";
 import { DeleteIcon } from "@chakra-ui/icons";
 import { useMutation } from "@apollo/client";
-import { DELETE_CLIENT } from "../services/graphql/mutations/deleteClient";
-import { GET_CLIENTS } from "../services/graphql/getClients";
+import { GET_CLIENTS } from "../../services/graphql/getClients";
+import { Client, RootQueryType } from "../../__generated__/graphql";
+import { DELETE_CLIENT } from "../../services/graphql/mutations/deleteClient";
 
 export const ClientCard = ({ client }: { client: Maybe<Client> }) => {
   const [deleteClient] = useMutation(DELETE_CLIENT, {
